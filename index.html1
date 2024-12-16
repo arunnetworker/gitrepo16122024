@@ -1,0 +1,18 @@
+- hosts: all
+  remote_user: ec2-user
+  become: yes
+  tasks:
+    - name: install jenkins 
+      apt_repositry:
+        name: jenkins 
+        baseurl: http://pkg.jenkins.io/redhat-stable
+        gpkey:  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.ke
+        description: jenkins repo update 
+    - name: install jenkins
+      yum:
+        name: jenkins 
+        state: present
+    - name: start jenkins
+      service:
+        name: jenkins
+        state: started
